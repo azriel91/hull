@@ -2,6 +2,16 @@
 name = "hull"
 version = "0.1.0"
 authors = ["Azriel Hoh <azriel91@gmail.com>"]
+categories = ["development-tools"]
+documentation = "https://docs.rs/hull/"
+homepage = "https://github.com/azriel91/hull"
+keywords = ["build", "ci", "make", "workspace"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/azriel91/hull"
+
+[badges]
+maintenance = { status = "experimental" }
 
 [dependencies]
 cargo_metadata = "0.5"
