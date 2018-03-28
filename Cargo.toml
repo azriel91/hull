@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Azriel Hoh <azriel91@gmail.com>"]
 
 [dependencies]
+cargo_metadata = "0.5"
 structopt = "0.2"
 structopt-derive = "0.2"
 
