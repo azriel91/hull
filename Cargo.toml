@@ -1,5 +1,6 @@
 [package]
 name = "hull"
+description = "Build tool to aid Rust development."
 version = "0.1.0"
 authors = ["Azriel Hoh <azriel91@gmail.com>"]
 categories = ["development-tools"]
