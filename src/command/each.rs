@@ -2,6 +2,7 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use cargo_metadata;
+use duct::cmd;
 
 use command;
 
@@ -20,8 +21,10 @@ impl<'c> Each<'c> {
         let mut command = Command::new(&self.command[0]);
         command.args(&self.command[1..]).current_dir(path);
 
-        let mut child = command.spawn().expect("Failed to spawn command.");
-        let exit_status = child.wait().expect("Failed to wait on child process.");
+        let exit_status = cmd(&self.command[0], &self.command[1..])
+            .run()
+            .expect("Failed to run command.")
+            .status;
 
         if !exit_status.success() {
             panic!("Failed to execute command.");

@@ -1,8 +1,12 @@
 use std::env;
 use std::path::{Path, PathBuf};
-use std::process::Command;
+
+use duct::cmd;
+use shell_words::join;
 
 use command;
+
+const CARGO_CMD: &str = "cargo";
 
 #[derive(Debug)]
 pub struct Build<'c> {
@@ -43,12 +47,10 @@ impl<'c> Build<'c> {
             .map(|arg| arg.as_str())
             .collect::<Vec<&str>>());
 
-        let mut command = Command::new("cargo");
-        command.args(&args);
-        println!("Running command: `{:?}`", &command);
+        let expression = cmd(CARGO_CMD, &args);
+        println!("Running command: `{} {}`", CARGO_CMD, join(&args));
 
-        let mut child = command.spawn().expect("Failed to spawn command.");
-        let exit_status = child.wait().expect("Failed to wait on child process.");
+        let exit_status = expression.run().expect("Failed to run command.").status;
 
         if !exit_status.success() {
             panic!("Failed to execute command.");

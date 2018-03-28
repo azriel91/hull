@@ -8,9 +8,11 @@
 //! * **Cross OS:** Linux, Windows
 //! * **Crate Type:** Single, Virtual Workspace
 
+extern crate cargo_metadata;
+extern crate duct;
+extern crate shell_words;
 #[macro_use]
 extern crate structopt;
-extern crate cargo_metadata;
 
 mod command;
 
