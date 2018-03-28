@@ -13,6 +13,7 @@ extern crate duct;
 extern crate shell_words;
 #[macro_use]
 extern crate structopt;
+extern crate which;
 
 mod command;
 

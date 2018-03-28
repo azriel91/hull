@@ -1,8 +1,8 @@
 use std::path::{Path, PathBuf};
-use std::process::Command;
 
 use cargo_metadata;
 use duct::cmd;
+use which::which;
 
 use command;
 
@@ -18,10 +18,13 @@ impl<'c> Each<'c> {
     fn run_command_in(&self, path: &Path) {
         println!("Crate directory: {}", path.display());
 
-        let mut command = Command::new(&self.command[0]);
-        command.args(&self.command[1..]).current_dir(path);
+        let path_result = which(&self.command[0]);
+        let binary_path = match path_result {
+            Ok(path) => path,
+            Err(msg) => panic!("{}: {}", msg, &self.command[0]),
+        };
 
-        let exit_status = cmd(&self.command[0], &self.command[1..])
+        let exit_status = cmd(&binary_path, &self.command[1..])
             .run()
             .expect("Failed to run command.")
             .status;
