@@ -1,12 +1,14 @@
 # Hull
 
-*Hull* is a build tool to aid Rust development.
+*Hull* is a build tool to aid Rust development across Linux and Windows.
 
-This aims to make development life easier with the following environments in mind:
+## Contents
 
-* **Hosts:** Development machine, CI machine
-* **Cross OS:** Linux, Windows
-* **Crate Type:** Single, Virtual Workspace
+* [Usage](#usage)
+* [Installation](#installation)
+* [Status](#status)
+* [Motivation](#motivation)
+* [Questions](#questions)
 
 ## Usage
 
@@ -77,6 +79,6 @@ This tool was created out of frustration that I couldn't simply "just run this" 
 
 ## Questions
 
-* Why not OSX?
+* What about OSX?
 
-    I don't have a Mac currently, else I'd include OS X
+    I don't have a Mac currently, theoretically it should simply work but no guarantees.
