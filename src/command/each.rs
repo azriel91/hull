@@ -22,11 +22,12 @@ impl<'c> Each<'c> {
 
         let path_result = which(&self.command);
         let binary_path = match path_result {
-            Ok(path) => path,
+            Ok(binary_path) => binary_path,
             Err(msg) => panic!("{}: {}", msg, &self.command.display()),
         };
 
         let exit_status = cmd(&binary_path, &self.args)
+            .dir(path)
             .run()
             .expect("Failed to run command.")
             .status;
