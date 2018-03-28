@@ -10,21 +10,23 @@ use command;
 pub struct Each<'c> {
     /// Path to the crate manifest
     pub manifest_path: &'c PathBuf,
+    /// Command to execute
+    pub command: PathBuf,
     /// Arguments to pass through to `cargo build`
-    pub command: Vec<String>,
+    pub args: Vec<String>,
 }
 
 impl<'c> Each<'c> {
     fn run_command_in(&self, path: &Path) {
         println!("Crate directory: {}", path.display());
 
-        let path_result = which(&self.command[0]);
+        let path_result = which(&self.command);
         let binary_path = match path_result {
             Ok(path) => path,
-            Err(msg) => panic!("{}: {}", msg, &self.command[0]),
+            Err(msg) => panic!("{}: {}", msg, &self.command.display()),
         };
 
-        let exit_status = cmd(&binary_path, &self.command[1..])
+        let exit_status = cmd(&binary_path, &self.args)
             .run()
             .expect("Failed to run command.")
             .status;
