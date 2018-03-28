@@ -1,6 +1,6 @@
-# Cargo Do
+# Hull
 
-*Cargo Do* is a build tool to aid Rust development.
+*Hull* is a build tool to aid Rust development.
 
 This aims to make development life easier with the following environments in mind:
 

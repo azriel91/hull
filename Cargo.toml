@@ -1,0 +1,12 @@
+[package]
+name = "hull"
+version = "0.1.0"
+authors = ["Azriel Hoh <azriel91@gmail.com>"]
+
+[dependencies]
+structopt = "0.2"
+structopt-derive = "0.2"
+
+[[bin]]
+path = "src/main.rs"
+name = "hull"
