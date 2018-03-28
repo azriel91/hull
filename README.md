@@ -27,11 +27,19 @@ Workspaces:
 
 ```bash
 # Compile binaries, tests, and examples:
-hull each -- hull build
+hull build
+
+# Compile binaries, tests, and examples in release mode:
+hull build -- --release
 
 # Arbitrary command
 hull each -- echo $(pwd) # Linux
 hull each -- echo %~dp0  # Windows
+
+# Don't do this, because `hull build` automatically detects whether the crate is a workspace:
+hull each -- hull build
+# If you really need to, you can use this:
+hull each -- hull build --no-detect-workspace
 ```
 
 ## Installation
@@ -50,7 +58,7 @@ From source:
 
 ## Status
 
-Currently this is in "code it fast" mode, I will gradually productionize the code quality over time.
+Currently this is in experimental mode, I will gradually productionize the code quality over time.
 
 Roadmap:
 
