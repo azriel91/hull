@@ -56,7 +56,15 @@ impl Entry {
                 detect_workspace,
                 args: pass_through_args,
             } => {
-                if detect_workspace && is_workspace(&metadata) {
+                // Only smartly call `Each` iff:
+                //
+                // * We should be detecting workspace
+                // * We have detected a workspace
+                // * The crate directory is not the workspace crate
+                let workspace = is_workspace(&metadata);
+                let processing_member_crate = is_processing_member_crate(manifest_path, &metadata);
+
+                if detect_workspace && workspace && !processing_member_crate {
                     let mut args = vec!["build", "--no-detect-workspace", "--"]
                         .into_iter()
                         .map(|s| s.to_string())
@@ -85,8 +93,17 @@ impl Entry {
 }
 
 fn is_workspace(metadata: &Metadata) -> bool {
-    !(metadata.packages.len() == 1
-        && Path::new(&metadata.workspace_root)
-            .join("Cargo.toml")
-            .as_path() == Path::new(&metadata.packages[0].manifest_path))
+    metadata.packages.len() > 1
+}
+
+fn is_processing_member_crate(manifest_path: &PathBuf, metadata: &Metadata) -> bool {
+    let crate_dir = manifest_path
+        .parent()
+        .expect("Failed to get manifest parent dir.");
+    let workspace_root = Path::new(&metadata.workspace_root);
+
+    let crate_dir = crate_dir.canonicalize().unwrap();
+    let workspace_root = workspace_root.canonicalize().unwrap();
+
+    crate_dir != workspace_root
 }

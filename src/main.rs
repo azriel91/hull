@@ -22,7 +22,7 @@ use std::path::PathBuf;
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
-#[structopt(name = "cargo-do", about = "Compiles crates, binaries, and examples in a workspace.",
+#[structopt(name = "hull", about = "Compiles crates, binaries, and examples in a workspace.",
             raw(global_setting = "structopt::clap::AppSettings::ColoredHelp"))]
 struct Opt {
     /// Active cargo manifest.
@@ -37,7 +37,7 @@ struct Opt {
 
 fn main() {
     let opt = Opt::from_args();
-    let manifest_path = opt.manifest_path.unwrap();
+    let manifest_path = opt.manifest_path.unwrap().canonicalize().unwrap();
 
     opt.cmd
         .command(&manifest_path)
