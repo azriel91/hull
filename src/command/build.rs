@@ -47,10 +47,13 @@ impl<'c> Build<'c> {
             .map(|arg| arg.as_str())
             .collect::<Vec<&str>>());
 
-        let expression = cmd(CARGO_CMD, &args);
         println!("Running command: `{} {}`", CARGO_CMD, join(&args));
 
-        let exit_status = expression.run().expect("Failed to run command.").status;
+        let exit_status = cmd(CARGO_CMD, &args)
+            .dir(self.manifest_path.parent().unwrap())
+            .run()
+            .expect("Failed to run command.")
+            .status;
 
         if !exit_status.success() {
             panic!("Failed to execute command.");
