@@ -35,8 +35,8 @@ hull build
 hull build -- --release
 
 # Arbitrary command
-hull each -- bash -c 'echo ${PWD}' # Linux
-hull each -- cmd /Q /C echo %cd%   # Windows
+hull each -- bash -c 'echo ${PWD}' # Linux, Windows Git Bash
+hull each -- cmd /Q /C echo %cd%   # Windows Cmd
 
 # Don't do this, because `hull build` automatically detects whether the crate is a workspace:
 hull each -- hull build
