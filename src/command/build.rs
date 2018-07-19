@@ -42,10 +42,13 @@ impl<'c> Build<'c> {
     /// * `subcommand`: The cargo subcommand to use for compilation
     fn compile_crate(&self, base_args: Vec<&'static str>) {
         let mut args = base_args;
-        args.append(&mut self.args
-            .iter()
-            .map(|arg| arg.as_str())
-            .collect::<Vec<&str>>());
+        args.append(
+            &mut self
+                .args
+                .iter()
+                .map(|arg| arg.as_str())
+                .collect::<Vec<&str>>(),
+        );
 
         println!("Running command: `{} {}`", CARGO_CMD, join(&args));
 

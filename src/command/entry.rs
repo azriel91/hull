@@ -11,14 +11,18 @@ pub enum Entry {
     #[structopt(name = "build")]
     Build {
         /// Command to run inside each workspace crate directory.
-        #[structopt(long = "no-detect-workspace",
-                    help = "Disable detection of whether the current crate is a workspace crate.",
-                    parse(from_occurrences = "parse_detect_workspace"))]
+        #[structopt(
+            long = "no-detect-workspace",
+            help = "Disable detection of whether the current crate is a workspace crate.",
+            parse(from_occurrences = "parse_detect_workspace")
+        )]
         detect_workspace: bool,
 
         /// Rest of the arguments to pass through to `cargo build`
-        #[structopt(help = "Arguments to pass through to `cargo build`.\nSee `cargo help build` for the full list.",
-                    raw(allow_hyphen_values = "true"))]
+        #[structopt(
+            help = "Arguments to pass through to `cargo build`.\nSee `cargo help build` for the full list.",
+            raw(allow_hyphen_values = "true")
+        )]
         args: Vec<String>,
     },
 
@@ -30,8 +34,10 @@ pub enum Entry {
         command: PathBuf,
 
         /// Command to run inside each workspace crate directory.
-        #[structopt(help = "For workspaces, the command to run inside each crate directory.",
-                    raw(allow_hyphen_values = "true"))]
+        #[structopt(
+            help = "For workspaces, the command to run inside each crate directory.",
+            raw(allow_hyphen_values = "true")
+        )]
         args: Vec<String>,
     },
 }
