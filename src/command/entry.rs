@@ -108,8 +108,5 @@ fn is_processing_member_crate(manifest_path: &PathBuf, metadata: &Metadata) -> b
         .expect("Failed to get manifest parent dir.");
     let workspace_root = Path::new(&metadata.workspace_root);
 
-    let crate_dir = crate_dir.canonicalize().unwrap();
-    let workspace_root = workspace_root.canonicalize().unwrap();
-
     crate_dir != workspace_root
 }
