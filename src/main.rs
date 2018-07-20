@@ -44,10 +44,9 @@ struct Opt {
 
 fn main() {
     let opt = Opt::from_args();
-    let manifest_path = opt.manifest_path.canonicalize().unwrap();
 
     opt.cmd
-        .command(&manifest_path)
+        .command(&opt.manifest_path)
         .run()
         .expect("Failed to execute command");
 }

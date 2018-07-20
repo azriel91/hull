@@ -15,7 +15,7 @@ repository = "https://github.com/azriel91/hull"
 maintenance = { status = "experimental" }
 
 [dependencies]
-cargo_metadata = "0.5"
+cargo_metadata = "0.6"
 duct = "0.10"
 shell-words = "0.1"
 structopt = "0.2"
